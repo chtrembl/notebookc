@@ -51,3 +51,9 @@ steps:
 
 - script: |
     python setup.py bdist_wheel
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: 'PetStore/Python_Package_Feed'
+    
+- script: |
+    python -m twine upload -r Python_Package_Feed --config-file $(PYPIRC_PATH) dist/*.whl

@@ -17,6 +17,7 @@ strategy:
 
 steps:
 - task: UsePythonVersion@0
+  displayName: Configure Python
   inputs:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
@@ -36,10 +37,12 @@ steps:
   displayName: 'Artifact creation'
 
 - task: CopyFiles@2
+  displayName: Copy Files
   inputs:
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish Build Artifacts
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'dist'
@@ -51,9 +54,11 @@ steps:
 
 - script: |
     python setup.py bdist_wheel
+
 - task: TwineAuthenticate@1
+  displayName: Twine Authenticate
   inputs:
-    artifactFeed: 'PetStore/Python_Package_Feed'
+    artifactFeed: PetStore/Python_Package_Feed
     
 - script: |
     python -m twine upload -r PetStore/Python_Package_Feed --config-file $(PYPIRC_PATH) dist/*.whl --verbose

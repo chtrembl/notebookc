@@ -56,4 +56,4 @@ steps:
     artifactFeed: 'PetStore/Python_Package_Feed'
     
 - script: |
-    python -m twine upload -r PetStore/Python_Package_Feed --config-file $(PYPIRC_PATH) dist/*.whl --vebose
+    python -m twine upload -r PetStore/Python_Package_Feed --config-file $(PYPIRC_PATH) dist/*.whl --verbose
